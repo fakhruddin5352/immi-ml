@@ -1,3 +1,4 @@
 <div>
   <immi-predict-drop (fileDropped)="fileDropped($event)"></immi-predict-drop>
+  <immi-predict-result-list (closed)="closePrediction($event)" [predictions]="predictions$ | async"></immi-predict-result-list>
 </div>

@@ -24,7 +24,6 @@ export class PredictDropComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
           // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
           this.fileDropped.emit({
             file: file,
             name: fileEntry.name,
@@ -34,7 +33,6 @@ export class PredictDropComponent implements OnInit {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }

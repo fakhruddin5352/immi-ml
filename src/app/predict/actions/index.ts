@@ -25,7 +25,7 @@ export class LoadPredictionSuccessAction implements Action {
     }
 }
 
-export class LoadPredictionFailed implements Action {
+export class LoadPredictionFailedAction implements Action {
     readonly type = PredictActionTypes.LoadPredictionFailed;
 
     constructor(public error: string) {
@@ -33,5 +33,13 @@ export class LoadPredictionFailed implements Action {
     }
 }
 
-export type PredictActions = AddFileAction | LoadPredictionSuccessAction | LoadPredictionFailed;
+export class RemovePredictionAction implements Action {
+    readonly type = PredictActionTypes.RemovePrediction;
+
+    constructor(public prediction: Prediction) {
+
+    }
+}
+
+export type PredictActions = AddFileAction | LoadPredictionSuccessAction | LoadPredictionFailedAction | RemovePredictionAction;
 

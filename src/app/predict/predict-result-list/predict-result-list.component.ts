@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Prediction } from '../reducers';
 
 @Component({
   selector: 'immi-predict-result-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PredictResultListComponent implements OnInit {
 
+  @Input('predictions') predictions: Prediction[];
+  @Output() closed = new EventEmitter<Prediction>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  close(prediction: Prediction) {
+    this.closed.emit(prediction);
   }
 
 }

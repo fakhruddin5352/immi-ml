@@ -10,13 +10,15 @@ import { StoreModule } from '@ngrx/store';
 import * as fromPredict from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PredictEffects } from './predict.effects';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FileDropModule,
     StoreModule.forFeature('predict', fromPredict.reducers, { metaReducers: fromPredict.metaReducers }),
-    EffectsModule.forFeature([PredictEffects])
+    EffectsModule.forFeature([PredictEffects]),
+    ChartsModule
   ],
   exports: [PredictComponent],
   declarations: [PredictComponent, PredictDropComponent, PredictResultComponent, PredictResultListComponent],

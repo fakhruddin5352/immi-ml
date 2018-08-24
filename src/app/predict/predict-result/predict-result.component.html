@@ -1,3 +1,20 @@
-<p>
-  predict-result works!
-</p>
+<div>
+  <div class="row">
+    <div class="col-4">
+        <img src="{{imageUrl}}" class="preview-img">
+      </div>
+    <div class="col-8">
+        <div class="predict-chart">
+            <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [colors]="colors"
+                    [chartType]="barChartType"></canvas>
+          </div>
+            
+    </div>
+  </div>
+
+</div>
