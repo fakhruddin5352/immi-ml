@@ -1,8 +1,7 @@
 import { Action } from '@ngrx/store';
-import { FileSystemFileEntry, UploadFile } from 'ngx-file-drop';
 import { Prediction, PredictionPercentage } from '../reducers';
 import { FileInfo } from '../models/file-info';
- 
+
 export enum PredictActionTypes {
     AddFile = '[Predict] AddFile',
     LoadPrediction = '[Predict] LoadPrediction',
@@ -59,5 +58,5 @@ export class RemovePredictionAction implements Action {
 }
 
 export type PredictActions = AddFileAction | LoadPredictionSuccessAction | LoadPredictionFailedAction | RemovePredictionAction
- | ProgressPredictionAction;
+    | ProgressPredictionAction;
 

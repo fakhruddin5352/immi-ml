@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FileSystemFileEntry, FileSystemDirectoryEntry, UploadEvent, UploadFile } from 'ngx-file-drop';
 import { FileInfo } from '../models/file-info';
 
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +9,11 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./predict-drop.component.css']
 })
 export class PredictDropComponent implements OnInit {
+  files: File[] = [];
   faUpload = faUpload;
+  validComboDrag = false;
 
-  @Output()  fileDropped = new EventEmitter<FileInfo>();
+  @Output() fileDropped = new EventEmitter<FileInfo>();
 
   constructor() { }
 
@@ -20,24 +21,14 @@ export class PredictDropComponent implements OnInit {
   }
 
 
-  public dropped(event: UploadEvent) {
-    for (const droppedFile of event.files) {
-
-      // Is it a file?
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          // Here you can access the real file
-          this.fileDropped.emit({
-            file: file,
-            name: fileEntry.name,
-            relativePath: droppedFile.relativePath
-          });
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-      }
+  upload() {
+    if (this.files.length) {
+      this.fileDropped.emit({
+        file: this.files[0],
+        name: this.files[0].name,
+        relativePath: this.files[0].name
+      });
+      this.files = [];
     }
   }
 

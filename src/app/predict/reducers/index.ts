@@ -8,7 +8,6 @@ import {
 import { environment } from '../../../environments/environment';
 import * as fromPredictions from './predictions.reducer';
 
-
 export const reducers: ActionReducerMap<fromPredictions.Predict> = {
   predictions: fromPredictions.reducer,
 };

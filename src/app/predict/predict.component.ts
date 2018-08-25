@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry, UploadFile } from 'ngx-file-drop';
 import { Store, select } from '@ngrx/store';
 import { AddFileAction, RemovePredictionAction, LoadPredictionAction } from './actions';
 import { FileInfo } from './models/file-info';

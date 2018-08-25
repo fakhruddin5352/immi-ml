@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { PredictService } from './predict.service';
-import { AddFileAction, PredictActionTypes, LoadPredictionFailedAction, LoadPredictionSuccessAction, LoadPredictionAction, ProgressPredictionAction } from './actions';
+import { AddFileAction, PredictActionTypes, LoadPredictionFailedAction,
+  LoadPredictionSuccessAction, LoadPredictionAction, ProgressPredictionAction } from './actions';
 import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { PredictResponse } from './models/predict-response';
 import { of, concat, Observable } from 'rxjs';

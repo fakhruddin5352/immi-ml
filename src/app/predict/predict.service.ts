@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FileSystemFileEntry, UploadFile } from 'ngx-file-drop';
-import { HttpClient, HttpHeaders, HttpEventType, HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { Predict, Prediction } from './reducers';
 import { PredictResponse } from './models/predict-response';
 import { FileInfo } from './models/file-info';
 import { map, filter, catchError } from 'rxjs/operators';

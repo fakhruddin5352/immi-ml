@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PredictComponent } from './predict.component';
-import { FileDropModule } from 'ngx-file-drop';
 import { PredictService } from './predict.service';
 import { PredictDropComponent } from './predict-drop/predict-drop.component';
 import { PredictResultComponent } from './predict-result/predict-result.component';
@@ -13,15 +12,16 @@ import { PredictEffects } from './predict.effects';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ngfModule } from 'angular-file';
 
 @NgModule({
   imports: [
     CommonModule,
-    FileDropModule,
     StoreModule.forFeature('predict', fromPredict.reducers, { metaReducers: fromPredict.metaReducers }),
     EffectsModule.forFeature([PredictEffects]),
     ChartsModule,
     NgbModule,
+    ngfModule,
     FontAwesomeModule
   ],
   exports: [PredictComponent],

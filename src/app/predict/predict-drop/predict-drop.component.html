@@ -1,5 +1,8 @@
-<div>
-  <file-drop headertext="" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" #fileDrop>
-     
- Drop your immigration documents here &nbsp;<fa-icon [icon]="faUpload"></fa-icon></file-drop>
+<div ngfDrop multiple="1" selectable="1" [(validDrag)]="validComboDrag" [(files)]="files" accept="image/*"
+   class="well my-drop-zone" [class.invalid-drag]="validComboDrag===false"
+  [class.valid-drag]="validComboDrag" (filesChange)="upload()">
+  <div class="my-drop-content">
+  Drop your immigration documents here &nbsp;
+  <fa-icon [icon]="faUpload"></fa-icon>
+  </div>
 </div>
