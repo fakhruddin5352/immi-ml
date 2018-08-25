@@ -1,6 +1,23 @@
-import { Action } from '@ngrx/store';
-import { Prediction } from '.';
 import { PredictActions, PredictActionTypes } from '../actions';
+import { FileInfo } from '../models/file-info';
+
+
+export interface PredictionPercentage {
+  label: string;
+  percentage: number;
+}
+export interface Prediction {
+  name: string;
+  color: string;
+  percentages: PredictionPercentage[];
+  progress: number;
+  file: FileInfo;
+  id: number;
+  error?: string;
+}
+export interface Predict {
+  predictions: Prediction[];
+}
 
 
 export const initialState: Prediction[] = [];
@@ -27,6 +44,13 @@ export function reducer(state = initialState, action: PredictActions): Predictio
       return state.map(prediction => {
         if (prediction.id === action.id) {
           return ({ ...prediction, percentages: action.percentages });
+        }
+        return prediction;
+      });
+    case PredictActionTypes.LoadPredictionFailed:
+      return state.map(prediction => {
+        if (prediction.id === action.id) {
+          return ({ ...prediction, error: action.error });
         }
         return prediction;
       });

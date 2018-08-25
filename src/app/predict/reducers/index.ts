@@ -7,29 +7,15 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import * as fromPredictions from './predictions.reducer';
-import { FileInfo } from '../models/file-info';
 
-export interface PredictionPercentage {
-  label: string;
-  percentage: number;
-}
-export interface Prediction {
-  name: string;
-  color: string;
-  percentages: PredictionPercentage[];
-  progress: number;
-  file: FileInfo;
-  id: number;
-}
-export interface Predict {
-  predictions: Prediction[];
-}
 
-export const reducers: ActionReducerMap<Predict> = {
+export const reducers: ActionReducerMap<fromPredictions.Predict> = {
   predictions: fromPredictions.reducer,
 };
 
-const getPredictFeatureState = createFeatureSelector<Predict>('predict');
+export {Predict, Prediction, PredictionPercentage} from './predictions.reducer';
+
+const getPredictFeatureState = createFeatureSelector<fromPredictions.Predict>('predict');
 export const getPredictions = createSelector(getPredictFeatureState, state => state.predictions);
 
-export const metaReducers: MetaReducer<Predict>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<fromPredictions.Predict>[] = !environment.production ? [] : [];

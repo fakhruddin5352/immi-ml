@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { FileSystemFileEntry, UploadFile } from 'ngx-file-drop';
 import { HttpClient, HttpHeaders, HttpEventType, HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Predict, Prediction } from './reducers';
 import { PredictResponse } from './models/predict-response';
 import { FileInfo } from './models/file-info';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, catchError } from 'rxjs/operators';
 import { HttpUploadProgressEvent, HttpDownloadProgressEvent } from '@angular/common/http/src/response';
 
 @Injectable()
@@ -31,7 +31,6 @@ export class PredictService {
           event.type === HttpEventType.UploadProgress ||
           event.type === HttpEventType.Sent)),
         map((event: HttpEvent<any>) => {
-          console.log(event);
           if (event.type === HttpEventType.Sent) {
             return { progress: 0, done: false };
           } if (event.type === HttpEventType.DownloadProgress) {
@@ -46,6 +45,6 @@ export class PredictService {
             response.body.progress = 100;
             return response.body;
           }
-        }));
+        }), catchError(err => throwError(err.message) ));
   }
 }
