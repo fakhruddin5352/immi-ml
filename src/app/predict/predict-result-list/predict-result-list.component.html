@@ -1,19 +1,5 @@
 <div>
-  <div class="row mt-3" [ngStyle]="{'background-color': prediction.color}" *ngFor="let prediction of predictions" >
-    <div class="col-12">
-      <div class="row">
-        <div class="col-1">
-            <button type="button" class="close" aria-label="Close" (click)="close(prediction)">
-                <span aria-hidden="true">&times;</span>
-              </button>          
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-            <immi-predict-result [prediction]="prediction"></immi-predict-result>
-
-        </div>        
-      </div>
-    </div>
+  <div *ngFor="let prediction of predictions" class=" mt-4" >
+            <immi-predict-result [prediction]="prediction" (closed)="close(prediction)"></immi-predict-result>
   </div>
 </div>  

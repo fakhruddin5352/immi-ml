@@ -14,6 +14,8 @@ export interface Prediction {
   file: FileInfo;
   id: number;
   error?: string;
+  startTime: Date;
+  resultTime?: Date;
 }
 export interface Predict {
   predictions: Prediction[];
@@ -31,7 +33,8 @@ export function reducer(state = initialState, action: PredictActions): Predictio
         name: action.file.name,
         progress: 0,
         percentages: [],
-        id: action.id
+        id: action.id,
+        startTime: new Date()
       }, ...state];
     case PredictActionTypes.ProgressPrediction:
       return state.map(prediction => {
@@ -43,7 +46,7 @@ export function reducer(state = initialState, action: PredictActions): Predictio
     case PredictActionTypes.LoadPredictionSuccess:
       return state.map(prediction => {
         if (prediction.id === action.id) {
-          return ({ ...prediction, percentages: action.percentages });
+          return ({ ...prediction, percentages: action.percentages, resultTime: new Date() });
         }
         return prediction;
       });

@@ -1,30 +1,31 @@
-<div>
-  <div class="row">
-    <div class="col col-lg-4">
-      <div class="row">
-        <div class="col-12"> <img src="{{imageUrl}}" class="preview-img"></div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <ngb-progressbar type="success" [value]="prediction.progress"></ngb-progressbar>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="col col-lg-8">
-      <p *ngIf="prediction.error">
+<div class="card">
+  <div class="card-header" [ngStyle]="{'background-color': prediction.color}">
+        <div> {{prediction.name}}&nbsp;&nbsp;<small class="size">{{getImageSize()}}</small> </div>
+        <div *ngIf="getResult()">{{getResult()}}&nbsp;<strong class="prediction">  <sup>prediction {{getPercentage()}}</sup> </strong>&nbsp;&nbsp; <small class="time">{{getTime()}}</small></div>
+          <fa-icon [icon]="faWindowClose" class="action-header"  (click)="close()"></fa-icon>
+        <ngb-progressbar type="success" [value]="prediction.progress" height=".5rem"> </ngb-progressbar>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col col-xl-4"> <img src="{{imageUrl}}" class="preview-img"> </div>
+      <div class="col col-xl-8">
+        <p *ngIf="prediction.error">
           <ngb-alert [dismissible]="false">
             {{prediction.error}}
           </ngb-alert>
         </p>
-      <div class="predict-chart" *ngIf="barChartData">
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-          [colors]="colors" [chartType]="barChartType"></canvas>
+        <div class="predict-chart" *ngIf="barChartData">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+            [colors]="colors" [chartType]="barChartType"></canvas>
 
+        </div>
       </div>
-
     </div>
+
   </div>
+  <div class="card-footer text-muted">
+    <i>{{prediction.name}} </i>
+  </div>
+
 
 </div>

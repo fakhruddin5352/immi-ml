@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Prediction } from '../reducers';
 import { BaseChartDirective } from 'ng2-charts';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'immi-predict-result',
@@ -10,6 +12,7 @@ import { BaseChartDirective } from 'ng2-charts';
 export class PredictResultComponent implements OnInit {
 
   @Input('prediction') prediction: Prediction;
+  @Output() closed = new EventEmitter();
 
   reader = new FileReader();
   imageUrl = '';
@@ -20,7 +23,7 @@ export class PredictResultComponent implements OnInit {
   };
   barChartLabels: string[];
   barChartType = 'horizontalBar';
-  barChartLegend = true;
+  barChartLegend = false;
   barChartData: any;
   colors = [
     {
@@ -30,7 +33,9 @@ export class PredictResultComponent implements OnInit {
     }
   ];
 
-
+  label = '';
+  percentage = 0;
+  faWindowClose = faWindowClose;
 
   constructor() { }
 
@@ -46,14 +51,33 @@ export class PredictResultComponent implements OnInit {
         .reduce((p, c) => p.percentage > c.percentage ? p : c);
 
       const isSure = max.percentage > 0.7;
-      const label = isSure ? `Seems to be a ${max.label}` : `Not sure`;
+      this.label = isSure ? `${max.label}` : `Inconclusive`;
+      this.percentage = max.percentage;
       const color = isSure ? max.color : 'gray';
       this.barChartData = [{
-        data: this.prediction.percentages.map(p => Math.round(p.percentage * 10000) / 100), label
+        data: this.prediction.percentages.map(p => Math.round(p.percentage * 10000) / 100)
       }];
     }
   }
 
-  public getImageUrl() {
+  getResult() {
+    return this.label;
+  }
+  getImageSize() {
+    return `${Math.round(this.prediction.file.file.size * 100 / 1024) / 100} Kb`;
+  }
+
+
+  getPercentage() {
+    return `${Math.round(this.percentage * 10000) / 100}%`;
+  }
+
+  getTime() {
+    if (this.prediction.resultTime) {
+      return `${(this.prediction.resultTime.getTime() - this.prediction.startTime.getTime())}ms`;
+    }
+  }
+  close() {
+    this.closed.emit();
   }
 }
