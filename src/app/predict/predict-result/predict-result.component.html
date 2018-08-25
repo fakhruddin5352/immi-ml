@@ -1,19 +1,24 @@
 <div>
   <div class="row">
     <div class="col-4">
-        <img src="{{imageUrl}}" class="preview-img">
+      <div class="row">
+        <div class="col-12"> <img src="{{imageUrl}}" class="preview-img"></div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <ngb-progressbar type="success" [value]="prediction.progress"></ngb-progressbar>
+        </div>
+      </div>
+
+
+    </div>
     <div class="col-8">
-        <div class="predict-chart">
-            <canvas baseChart
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [options]="barChartOptions"
-                    [legend]="barChartLegend"
-                    [colors]="colors"
-                    [chartType]="barChartType"></canvas>
-          </div>
-            
+      <div class="predict-chart" *ngIf="barChartData">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+          [colors]="colors" [chartType]="barChartType"></canvas>
+
+      </div>
+
     </div>
   </div>
 

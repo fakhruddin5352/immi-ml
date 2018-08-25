@@ -9,15 +9,19 @@ import { Prediction } from '../reducers';
 export class PredictResultListComponent implements OnInit {
 
   @Input('predictions') predictions: Prediction[];
-  @Output() closed = new EventEmitter<Prediction>();
+  @Output() closed = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  getActiveId() {
+    return this.predictions.length ? this.predictions[0].id : 0;
+  }
   close(prediction: Prediction) {
-    this.closed.emit(prediction);
+    this.closed.emit(prediction.id);
   }
 
 }

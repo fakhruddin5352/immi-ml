@@ -1,4 +1,6 @@
 <div>
+    <div class="jumbotron">
   <immi-predict-drop (fileDropped)="fileDropped($event)"></immi-predict-drop>
+  </div>
   <immi-predict-result-list (closed)="closePrediction($event)" [predictions]="predictions$ | async"></immi-predict-result-list>
 </div>

@@ -15,9 +15,11 @@ export interface PredictionPercentage {
 }
 export interface Prediction {
   name: string;
+  color: string;
   percentages: PredictionPercentage[];
   progress: number;
   file: FileInfo;
+  id: number;
 }
 export interface Predict {
   predictions: Prediction[];

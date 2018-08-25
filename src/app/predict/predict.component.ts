@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry, UploadFile} from 'ngx-file-drop';
+import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry, UploadFile } from 'ngx-file-drop';
 import { Store, select } from '@ngrx/store';
-import { AddFileAction, RemovePredictionAction } from './actions';
+import { AddFileAction, RemovePredictionAction, LoadPredictionAction } from './actions';
 import { FileInfo } from './models/file-info';
 import { getPredictions, Prediction } from './reducers';
+import { takeLast, tap, take } from 'rxjs/operators';
+
+export const yellow = '#efffff';
+export const blue = '#ffffef';
 
 @Component({
   selector: 'immi-predict',
@@ -20,11 +24,16 @@ export class PredictComponent implements OnInit {
   ngOnInit() {
   }
 
-  closePrediction(prediction: Prediction) {
-    this.store.dispatch(new RemovePredictionAction(prediction));
+  closePrediction(id: number) {
+    this.store.dispatch(new RemovePredictionAction(id));
   }
   fileDropped(file: FileInfo) {
-    this.store.dispatch(new AddFileAction(file));
+    this.predictions$.pipe(take(1)).subscribe(predictions => {
+      const currentMax = predictions.reduce((pre, cur) => cur.id > pre.id ? cur : pre, { id: 0, color: yellow });
+      const id = currentMax.id + 1;
+      const color = currentMax.color === yellow ? blue : yellow;
+      this.store.dispatch(new LoadPredictionAction(id, color, file));
+    });
   }
 
 }

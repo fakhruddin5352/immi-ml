@@ -11,6 +11,7 @@ import * as fromPredict from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PredictEffects } from './predict.effects';
 import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ChartsModule } from 'ng2-charts';
     FileDropModule,
     StoreModule.forFeature('predict', fromPredict.reducers, { metaReducers: fromPredict.metaReducers }),
     EffectsModule.forFeature([PredictEffects]),
-    ChartsModule
+    ChartsModule,
+    NgbModule
   ],
   exports: [PredictComponent],
   declarations: [PredictComponent, PredictDropComponent, PredictResultComponent, PredictResultListComponent],

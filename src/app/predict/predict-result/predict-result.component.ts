@@ -23,7 +23,7 @@ export class PredictResultComponent implements OnInit {
   barChartLegend = true;
   barChartData: any;
   colors = [
-    {      
+    {
       'backgroundColor': [
         'red', 'blue', 'green', 'yellow', 'orange', 'brown', 'black', 'pink', 'cyan'
       ]
@@ -31,7 +31,6 @@ export class PredictResultComponent implements OnInit {
   ];
 
 
-  b:BaseChartDirective;
 
   constructor() { }
 
@@ -41,16 +40,18 @@ export class PredictResultComponent implements OnInit {
       this.imageUrl = this.reader.result as string;
     }, false);
 
-    this.barChartLabels = this.prediction.percentages.map(p => p.label);
-    const max = this.prediction.percentages.map((p, i) => ({ percentage: p.percentage, color: this.colors[i], label: p.label }))
-      .reduce((p, c) => p.percentage > c.percentage ? p : c);
+    if (this.prediction.percentages.length) {
+      this.barChartLabels = this.prediction.percentages.map(p => p.label);
+      const max = this.prediction.percentages.map((p, i) => ({ percentage: p.percentage, color: this.colors[i], label: p.label }))
+        .reduce((p, c) => p.percentage > c.percentage ? p : c);
 
-    const isSure = max.percentage > 0.7;
-    const label = isSure ? `Seems to be a ${max.label}` : `Not sure`;
-    const color = isSure ? max.color : 'gray';
-    this.barChartData = [{
-      data: this.prediction.percentages.map(p => Math.round(p.percentage * 10000) / 100), label
-    }];
+      const isSure = max.percentage > 0.7;
+      const label = isSure ? `Seems to be a ${max.label}` : `Not sure`;
+      const color = isSure ? max.color : 'gray';
+      this.barChartData = [{
+        data: this.prediction.percentages.map(p => Math.round(p.percentage * 10000) / 100), label
+      }];
+    }
   }
 
   public getImageUrl() {
