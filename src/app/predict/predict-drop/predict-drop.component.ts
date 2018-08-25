@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FileSystemFileEntry, FileSystemDirectoryEntry, UploadEvent, UploadFile } from 'ngx-file-drop';
 import { FileInfo } from '../models/file-info';
+
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'immi-predict-drop',
@@ -8,6 +10,7 @@ import { FileInfo } from '../models/file-info';
   styleUrls: ['./predict-drop.component.css']
 })
 export class PredictDropComponent implements OnInit {
+  faUpload = faUpload;
 
   @Output()  fileDropped = new EventEmitter<FileInfo>();
 
@@ -15,6 +18,7 @@ export class PredictDropComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   public dropped(event: UploadEvent) {
     for (const droppedFile of event.files) {

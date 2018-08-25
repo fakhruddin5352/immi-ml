@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { PredictEffects } from './predict.effects';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StoreModule.forFeature('predict', fromPredict.reducers, { metaReducers: fromPredict.metaReducers }),
     EffectsModule.forFeature([PredictEffects]),
     ChartsModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   exports: [PredictComponent],
   declarations: [PredictComponent, PredictDropComponent, PredictResultComponent, PredictResultListComponent],

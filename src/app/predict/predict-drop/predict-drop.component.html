@@ -1,4 +1,5 @@
 <div>
-  <file-drop headertext="" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-     </file-drop>
+  <file-drop headertext="" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" #fileDrop>
+     
+ Drop your immigration documents here &nbsp;<fa-icon [icon]="faUpload"></fa-icon></file-drop>
 </div>
