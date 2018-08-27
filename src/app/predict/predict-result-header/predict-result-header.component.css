@@ -1,0 +1,18 @@
+.prediction {
+  color: red
+}
+
+.time {
+  color: darkblue
+}
+
+.size {
+  color: darkgreen
+}
+
+
+.action-header {
+  position: absolute;
+  top: 2.5%;
+  right: 3%;
+}

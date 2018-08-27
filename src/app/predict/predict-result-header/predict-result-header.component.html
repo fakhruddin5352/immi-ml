@@ -1,0 +1,13 @@
+<div>
+  <div> {{name}}&nbsp;&nbsp;
+    <small class="size">{{getImageSize()}}</small>
+  </div>
+  <div *ngIf="getResult()">{{getResult()}}&nbsp;
+    <strong class="prediction">
+      <sup>prediction {{getPercentage()}}</sup>
+    </strong>&nbsp;&nbsp;
+    <small class="time">{{getTime()}}</small>
+  </div>
+  <fa-icon [icon]="faWindowClose" class="action-header" (click)="close()"></fa-icon>
+  <ngb-progressbar type="success" [value]="progress" height=".5rem"> </ngb-progressbar>
+</div>

@@ -1,0 +1,4 @@
+<div class="predict-chart" *ngIf="barChartData">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+      [colors]="colors" [chartType]="barChartType"></canvas>
+  </div>

@@ -1,24 +1,21 @@
 <div class="card">
   <div class="card-header" [ngStyle]="{'background-color': prediction.color}">
-        <div> {{prediction.name}}&nbsp;&nbsp;<small class="size">{{getImageSize()}}</small> </div>
-        <div *ngIf="getResult()">{{getResult()}}&nbsp;<strong class="prediction">  <sup>prediction {{getPercentage()}}</sup> </strong>&nbsp;&nbsp; <small class="time">{{getTime()}}</small></div>
-          <fa-icon [icon]="faWindowClose" class="action-header"  (click)="close()"></fa-icon>
-        <ngb-progressbar type="success" [value]="prediction.progress" height=".5rem"> </ngb-progressbar>
+    <immi-predict-result-header [name]="prediction.name" [size]="prediction.file.file.size" [progress]="prediction.progress"
+      [percentages]="prediction.percentages" [resultTime]="prediction.resultTime" [startTime]="prediction.startTime"
+      (closed)="close()"></immi-predict-result-header>
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col col-xl-4"> <img src="{{imageUrl}}" class="preview-img"> </div>
+      <div class="col col-xl-4">
+        <immi-predict-result-preview [file]="prediction.file"></immi-predict-result-preview>
+      </div>
       <div class="col col-xl-8">
         <p *ngIf="prediction.error">
           <ngb-alert [dismissible]="false">
             {{prediction.error}}
           </ngb-alert>
         </p>
-        <div class="predict-chart" *ngIf="barChartData">
-          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-            [colors]="colors" [chartType]="barChartType"></canvas>
-
-        </div>
+        <immi-predict-result-graph [percentages]="prediction.percentages"></immi-predict-result-graph>
       </div>
     </div>
 
@@ -26,6 +23,4 @@
   <div class="card-footer text-muted">
     <i>{{prediction.name}} </i>
   </div>
-
-
 </div>

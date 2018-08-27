@@ -13,6 +13,9 @@ import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ngfModule } from 'angular-file';
+import { PredictResultHeaderComponent } from './predict-result-header/predict-result-header.component';
+import { PredictResultPreviewComponent } from './predict-result-preview/predict-result-preview.component';
+import { PredictResultGraphComponent } from './predict-result-graph/predict-result-graph.component';
 
 @NgModule({
   imports: [
@@ -25,7 +28,7 @@ import { ngfModule } from 'angular-file';
     FontAwesomeModule
   ],
   exports: [PredictComponent],
-  declarations: [PredictComponent, PredictDropComponent, PredictResultComponent, PredictResultListComponent],
+  declarations: [PredictComponent, PredictDropComponent, PredictResultComponent, PredictResultListComponent, PredictResultHeaderComponent, PredictResultPreviewComponent, PredictResultGraphComponent],
   providers: [PredictService]
 })
 export class PredictModule { }
