@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { FileInfo } from '../models/file-info';
 
 @Component({
@@ -16,10 +16,10 @@ export class PredictResultPreviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.reader.readAsDataURL(this.file.file);
     this.reader.addEventListener('load', () => {
       this.imageUrl = this.reader.result as string;
     }, false);
+    this.reader.readAsDataURL(this.file.file);
 
 
   }

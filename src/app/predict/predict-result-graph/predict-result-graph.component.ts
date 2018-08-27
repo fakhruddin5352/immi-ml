@@ -4,7 +4,8 @@ import { PredictionPercentage } from '../reducers';
 @Component({
   selector: 'immi-predict-result-graph',
   templateUrl: './predict-result-graph.component.html',
-  styleUrls: ['./predict-result-graph.component.css']
+  styleUrls: ['./predict-result-graph.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PredictResultGraphComponent implements OnChanges {
 

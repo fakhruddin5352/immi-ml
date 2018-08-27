@@ -7,7 +7,8 @@ const roundTo2 = (x) => Math.round((x * 100) / 100);
 @Component({
   selector: 'immi-predict-result-header',
   templateUrl: './predict-result-header.component.html',
-  styleUrls: ['./predict-result-header.component.css']
+  styleUrls: ['./predict-result-header.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PredictResultHeaderComponent implements OnChanges {
 
